@@ -1,15 +1,17 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import HomeScreen from "../screens/HomeScreen";
 import SearchScreen from "../screens/SearchScreen";
-import NotificationsScreen from "../screens/NotificationsScreen";
 import MessagesScreen from "../screens/MessagesScreen";
 import TweetScreen from "../screens/TweetScreen";
+import MentionsScreen from "../screens/MentionsScreen";
+import AllScreen from "../screens/AllScreen";
 
 const MainStackScreen = () => {
   const Tab = createBottomTabNavigator();
@@ -57,9 +59,9 @@ const MainStackScreen = () => {
   return (
     <Tab.Navigator tabBarOptions={tabBarOptions} screenOptions={screenOptions}>
       <Tab.Screen name="Home" component={HomeNavigator} />
-      <Tab.Screen name="Search" component={SearchScreen} />
-      <Tab.Screen name="Notifications" component={NotificationsScreen} />
-      <Tab.Screen name="Messages" component={MessagesScreen} />
+      <Tab.Screen name="Search" component={SearchNavigator} />
+      <Tab.Screen name="Notifications" component={NotificationsNavigator} />
+      <Tab.Screen name="Messages" component={MessageNavigator} />
     </Tab.Navigator>
   );
 };
@@ -133,3 +135,163 @@ const HomeNavigator = () => {
     </Stack.Navigator>
   );
 };
+
+const MessageNavigator = () => {
+  const Stack = createStackNavigator()
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="MessagesScreen"
+        component={MessagesScreen}
+        options={{
+          headerRightContainerStyle: {
+            marginRight: 15,
+          },
+          headerLeftContainerStyle: {
+            marginLeft: 15,
+          },
+          headerTitleAlign: "center",
+          headerTitle: () => (
+            <TextInput style={{
+              backgroundColor: "#cccfce",
+              paddingHorizontal: 20,
+              paddingVertical: 5,
+              borderRadius: 999,
+            }} placeholder="Search for people and groups" />
+          ),
+          headerRight: () => (
+            <Ionicons name="settings-outline" size={20} color="#00acee" />
+          ),
+          headerLeft: () => <Ionicons name="menu" size={30} color="#00acee" />,
+        }}
+      />
+    </Stack.Navigator>
+  )
+}
+
+const SearchNavigator = () => {
+  const Stack = createStackNavigator()
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="SearchScreen"
+        component={SearchScreen}
+        options={{
+          headerRightContainerStyle: {
+            marginRight: 15,
+          },
+          headerLeftContainerStyle: {
+            marginLeft: 15,
+          },
+          headerTitleAlign: "left",
+          headerTitle: () => (
+            <TextInput style={{
+              backgroundColor: "#cccfce",
+              paddingHorizontal: 20,
+              paddingVertical: 5,
+              borderRadius: 999,
+            }} placeholder="Search twitter" />
+          ),
+          headerRight: () => (
+            <Ionicons name="settings-outline" size={20} color="#00acee" />
+          ),
+          headerLeft: () => <Ionicons name="menu" size={30} color="#00acee" />,
+        }}
+      />
+    </Stack.Navigator>
+  )
+}
+
+const NotificationsNavigator = () => {
+  const Stack = createStackNavigator()
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="NotificationScreen"
+        component={topTabNavigation}
+        options={{
+          headerRightContainerStyle: {
+            marginRight: 15,
+          },
+          headerLeftContainerStyle: {
+            marginLeft: 15,
+          },
+          headerTitleAlign: "center",
+          headerTitle: () => (
+            <Text style={{
+              fontSize: 20,
+              letterSpacing: 1
+            }}>Notifications</Text>
+          ),
+          headerRight: () => (
+            <Ionicons name="settings-outline" size={20} color="#00acee" />
+          ),
+          headerLeft: () => <Ionicons name="menu" size={30} color="#00acee" />,
+        }}
+      />
+    </Stack.Navigator>
+  )
+}
+
+const topTabNavigation = () => {
+
+  const MainTab = createMaterialTopTabNavigator()
+
+  return (
+    <MainTab.Navigator 
+      initialRouteName="All"
+      tabBarOptions={{
+        activeTintColor: "#00acee",
+        style: {
+          backgroundColor: "#FFF"
+        },
+        indicatorStyle: {
+          backgroundColor: "#00acee",
+          height: 2.5,
+        },
+        labelStyle: {
+          fontWeight: 'bold'
+        },
+        inactiveTintColor: "gray"
+      }}
+    >
+      <MainTab.Screen
+        name="All"
+        component={TabOneNavigator}
+      />
+      <MainTab.Screen
+        name="Mentions"
+        component={TabTwoNavigator}
+      />
+    </MainTab.Navigator>
+  );
+}
+
+const TabOneNavigator = () => {
+
+  const TabOneStack = createStackNavigator()
+
+  return (
+    <TabOneStack.Navigator headerMode="none">
+      <TabOneStack.Screen
+        name="TabOneScreen"
+        component={AllScreen}
+      />
+    </TabOneStack.Navigator>
+  );
+}
+
+
+const TabTwoNavigator = () => {
+
+  const TabTwoStack = createStackNavigator()
+
+  return (
+    <TabTwoStack.Navigator headerMode="none">
+      <TabTwoStack.Screen
+        name="TabTwoScreen"
+        component={MentionsScreen}
+      />
+    </TabTwoStack.Navigator>
+  );
+}

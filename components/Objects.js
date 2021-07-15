@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, View, ActivityIndicator } from "react-native";
-import { EvilIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { StyleSheet, View } from "react-native";
+import { EvilIcons, MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 
 const Objects = () => {
   return (
@@ -22,7 +22,7 @@ const Objects = () => {
           ]
       }} name="chart" color="#00acee" size={40} />
       <EvilIcons name="location" color="#00acee" size={40} />
-      <ActivityIndicator size="small" color="#00acee" />
+      <Ionicons name="radio-button-off" size={30} color="gray" />
       <EvilIcons name="plus" color="#00acee" size={40} />
     </View>
   );
