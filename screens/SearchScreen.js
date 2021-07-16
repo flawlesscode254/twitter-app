@@ -1,13 +1,24 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, {useRef} from 'react'
+import { StyleSheet, DrawerLayoutAndroid, Text, View } from 'react-native'
 import TweetButton from '../components/TweetButton'
+import LeftNavigationScreen from './LeftNavigationScreen'
 
 const SearchScreen = () => {
+
+    const drawer = useRef(null);
+
     return (
-        <View style={styles.container}>
-            <Text>Search</Text>
+    <DrawerLayoutAndroid
+        ref={drawer}
+        drawerWidth={300}
+        drawerPosition={"left"}
+        renderNavigationView={LeftNavigationScreen}
+        >
+            <View style={styles.container}>
+                <Text>Search</Text>
+            </View>
             <TweetButton />
-        </View>
+        </DrawerLayoutAndroid>
     )
 }
 

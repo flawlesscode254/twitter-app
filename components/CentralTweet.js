@@ -1,11 +1,19 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 
 const CentralTweet = () => {
     return (
         <View style={{
             width: 260
         }}>
+            <View style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexDirection: "row",
+                width: 260
+            }}>
             <Text style={{
                 color: "black",
                 fontWeight: "bold"
@@ -13,6 +21,8 @@ const CentralTweet = () => {
                 fontWeight: "normal",
                 color: "gray"
             }}> @Duncan Kipkemoi</Text></Text>
+            <Ionicons name="ellipsis-vertical" color="gray" size={15} />
+            </View>
             <Text style={{
                 fontWeight: "bold",
                 color: "#00acee",

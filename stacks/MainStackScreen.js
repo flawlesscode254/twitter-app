@@ -12,6 +12,10 @@ import MessagesScreen from "../screens/MessagesScreen";
 import TweetScreen from "../screens/TweetScreen";
 import MentionsScreen from "../screens/MentionsScreen";
 import AllScreen from "../screens/AllScreen";
+import ViewTweetImage from "../screens/ViewTweetImage";
+import SearchSettings from "../screens/SearchSettings";
+import NotificationsSettings from "../screens/NotificationsSettings";
+import MessagesNotifications from "../screens/MessagesNotifications";
 
 const MainStackScreen = () => {
   const Tab = createBottomTabNavigator();
@@ -73,7 +77,7 @@ const HomeNavigator = () => {
   const navigation = useNavigation()
 
   const goTo = () => {
-    navigation.goBack()
+    navigation.navigate("HomeScreen")
   }
 
   return (
@@ -82,20 +86,10 @@ const HomeNavigator = () => {
         name="HomeScreen"
         component={HomeScreen}
         options={{
-          headerRightContainerStyle: {
-            marginRight: 15,
-          },
-          headerLeftContainerStyle: {
-            marginLeft: 15,
-          },
           headerTitleAlign: "center",
           headerTitle: () => (
             <Ionicons name="logo-twitter" size={30} color="#00acee" />
-          ),
-          headerRight: () => (
-            <Ionicons name="star-outline" size={30} color="#00acee" />
-          ),
-          headerLeft: () => <Ionicons name="menu" size={30} color="#00acee" />,
+          )
         }}
       />
       <Stack.Screen
@@ -132,12 +126,53 @@ const HomeNavigator = () => {
           </TouchableOpacity>
         }}
       />
+      <Stack.Screen
+        name="ViewTweet"
+        component={ViewTweetImage}
+        options={{
+          headerTintColor: "#FFF",
+          headerLeftContainerStyle: {
+            marginLeft: 15,
+            color: "#FFF"
+          },
+          headerTitleAlign: "left",
+          headerRightContainerStyle: {
+            marginRight: 20
+          },
+          headerStyle: {
+            backgroundColor: "gray",
+            shadowOpacity: 0,
+            elevation: 0
+          },
+          headerTitleStyle: {
+            color: "gray"
+          },
+          headerRight: () => (
+            <Ionicons name="ellipsis-vertical" size={24} color="#FFF" />
+          )
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
 const MessageNavigator = () => {
   const Stack = createStackNavigator()
+
+  const navigation = useNavigation()
+
+  const goSettings = () => {
+    navigation.navigate("MessagesSettings")
+  }
+
+  const goTo = () => {
+    navigation.goBack()
+  }
+
+  const goBack = () => {
+    navigation.navigate("MessagesScreen")
+  }
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -160,9 +195,44 @@ const MessageNavigator = () => {
             }} placeholder="Search for people and groups" />
           ),
           headerRight: () => (
-            <Ionicons name="settings-outline" size={20} color="#00acee" />
+            <TouchableOpacity onPress={goSettings}>
+              <Ionicons name="settings-outline" size={20} color="#00acee" />
+            </TouchableOpacity>
           ),
-          headerLeft: () => <Ionicons name="menu" size={30} color="#00acee" />,
+          headerLeft: () => (
+            <TouchableOpacity onPress={goTo}>
+              <Ionicons name="arrow-back" size={30} color="#00acee" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="MessagesSettings"
+        component={MessagesNotifications}
+        options={{
+          headerRightContainerStyle: {
+            marginRight: 15,
+          },
+          headerLeftContainerStyle: {
+            marginLeft: 15,
+          },
+          headerTitleAlign: "center",
+          headerTitle: () => (
+            <View>
+              <Text style={{
+                fontSize: 20,
+                letterSpacing: 1
+              }}>Direct Messages</Text>
+              <Text style={{
+                color: "gray"
+              }}>@Duncan Kipkemoi</Text>
+            </View>
+          ),
+          headerLeft: () => (
+            <TouchableOpacity onPress={goBack}>
+              <Ionicons name="arrow-back" size={30} color="#00acee" />
+            </TouchableOpacity>
+          ),
         }}
       />
     </Stack.Navigator>
@@ -171,6 +241,21 @@ const MessageNavigator = () => {
 
 const SearchNavigator = () => {
   const Stack = createStackNavigator()
+
+  const navigation = useNavigation()
+
+  const goTo = () => {
+    navigation.goBack()
+  }
+
+  const goSettings = () => {
+    navigation.navigate("SearchSettings")
+  }
+
+  const goBack = () => {
+    navigation.navigate("SearchScreen")
+  }
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -193,9 +278,44 @@ const SearchNavigator = () => {
             }} placeholder="Search twitter" />
           ),
           headerRight: () => (
-            <Ionicons name="settings-outline" size={20} color="#00acee" />
+            <TouchableOpacity onPress={goSettings}>
+              <Ionicons name="settings-outline" size={20} color="#00acee" />
+            </TouchableOpacity>
           ),
-          headerLeft: () => <Ionicons name="menu" size={30} color="#00acee" />,
+          headerLeft: () => (
+            <TouchableOpacity onPress={goTo}>
+              <Ionicons name="arrow-back" size={30} color="#00acee" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="SearchSettings"
+        component={SearchSettings}
+        options={{
+          headerRightContainerStyle: {
+            marginRight: 15,
+          },
+          headerLeftContainerStyle: {
+            marginLeft: 15,
+          },
+          headerTitleAlign: "left",
+          headerTitle: () => (
+            <View>
+              <Text style={{
+                fontSize: 20,
+                letterSpacing: 1
+              }}>Explore Settings</Text>
+              <Text style={{
+                color: "gray"
+              }}>@Duncan Kipkemoi</Text>
+            </View>
+          ),
+          headerLeft: () => (
+            <TouchableOpacity onPress={goBack}>
+              <Ionicons name="arrow-back" size={30} color="#00acee" />
+            </TouchableOpacity>
+          ),
         }}
       />
     </Stack.Navigator>
@@ -204,10 +324,25 @@ const SearchNavigator = () => {
 
 const NotificationsNavigator = () => {
   const Stack = createStackNavigator()
+
+  const navigation = useNavigation()
+
+  const goTo = () => {
+    navigation.goBack()
+  }
+
+  const goBack = () => {
+    navigation.navigate("NotificationsScreen")
+  }
+
+  const goSettings = () => {
+    navigation.navigate("NotificationsSettings")
+  }
+
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="NotificationScreen"
+        name="NotificationsScreen"
         component={topTabNavigation}
         options={{
           headerRightContainerStyle: {
@@ -224,9 +359,44 @@ const NotificationsNavigator = () => {
             }}>Notifications</Text>
           ),
           headerRight: () => (
-            <Ionicons name="settings-outline" size={20} color="#00acee" />
+            <TouchableOpacity onPress={goSettings}>
+              <Ionicons name="settings-outline" size={20} color="#00acee" />
+            </TouchableOpacity>
           ),
-          headerLeft: () => <Ionicons name="menu" size={30} color="#00acee" />,
+          headerLeft: () => (
+            <TouchableOpacity onPress={goTo}>
+              <Ionicons name="arrow-back" size={30} color="#00acee" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="NotificationsSettings"
+        component={NotificationsSettings}
+        options={{
+          headerRightContainerStyle: {
+            marginRight: 15,
+          },
+          headerLeftContainerStyle: {
+            marginLeft: 15,
+          },
+          headerTitleAlign: "center",
+          headerTitle: () => (
+            <View>
+              <Text style={{
+                fontSize: 20,
+                letterSpacing: 1
+              }}>Notifications</Text>
+              <Text style={{
+                color: "gray"
+              }}>@Duncan Kipkemoi</Text>
+            </View>
+          ),
+          headerLeft: () => (
+            <TouchableOpacity onPress={goBack}>
+              <Ionicons name="arrow-back" size={30} color="#00acee" />
+            </TouchableOpacity>
+          ),
         }}
       />
     </Stack.Navigator>
