@@ -100,26 +100,7 @@ const HomeNavigator = () => {
             marginLeft: 15,
           },
           headerTitleAlign: "center",
-          headerTitle: () => (
-            <View
-              style={{
-                backgroundColor: "#00acee",
-                paddingHorizontal: 20,
-                paddingVertical: 7,
-                borderRadius: 20,
-              }}
-            >
-              <Text
-                style={{
-                  color: "#FFF",
-                  fontWeight: "bold",
-                  letterSpacing: 2,
-                }}
-              >
-                Tweet
-              </Text>
-            </View>
-          ),
+          headerTitle: () => null,
           headerLeft: () => 
           <TouchableOpacity onPress={goTo}>
             <Ionicons name="close" size={30} color="#00acee" />
